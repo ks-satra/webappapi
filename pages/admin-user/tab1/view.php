@@ -125,10 +125,10 @@
         <thead>
             <tr>
                 <th scope="col" class="text-center">#</th>
-                <th scope="col">ชื่อ-นามสกุล</th>
-                <th scope="col" class="">อีเมล</th>
+                <th scope="col" class="text-center">ชื่อ-นามสกุล</th>
                 <th scope="col" class="text-center">โทรศัพท์</th>
-                <th scope="col" class="text-center">พื้นที่</th>
+                <th scope="col" class="text-center">อีเมล</th>
+                <th scope="col" class="text-center">รหัสผ่าน</th>
                 <th scope="col" class="text-center">สถานะ</th>
                 <th scope="col"></th>
             </tr>
@@ -149,44 +149,13 @@
                         "Y"=>'<span class="text-success"><i class="fas fa-check"></i> ใช้งาน</span>',
                         "N"=>'<span class="text-danger"><i class="fas fa-times"></i> ไม่ใช้งาน</span>'
                     );
-                    $area = "";
-                    $sql = "
-                        SELECT 
-                            user_area.*,
-                            province.province_name_thai
-                        FROM user_area
-                            INNER JOIN province ON province.province_id=user_area.province_id
-                        WHERE user_area.user_id='".$row["user_id"]."'
-                        ORDER BY province.province_name_thai
-                    ";
-                    $obj = $DATABASE->QueryObj($sql);
-                    if( sizeof($obj)==0 ) $area = '<span class="text-danger">ไม่มีสิทธิ์เข้าถึงพื้นที่</span>';
-                    else {
-                        $areas = '';
-                        foreach($obj as $key2=>$row2) {
-                            if($key2==0) $area = "จังหวัด".$row2["province_name_thai"];
-                            else {
-                                if($key2==1) $area .= " ...";
-                            }
-                            $admin = ( $row2["is_admin"]=="Y" ) ? "แอดมิน" : "อาสา";
-                            $areas .= '<b>'.$admin.'</b> : จังหวัด'.$row2["province_name_thai"].'<br>';
-                        }
-                        $area = '
-                            <div class="custom-tooltip txt-blue">
-                                '.$area.'
-                                <span class="tooltiptext" style="width:200px; font-size:12px;">
-                                    '.$areas.'
-                                </span>
-                            </div>
-                        ';
-                    }
                     echo '
                         <tr data-json="'.htmlspecialchars(json_encode($row)).'">
                             <th class="text-center order">'.(($show*($p-1))+($key+1)).'</th>
-                            <td>'.$row["item_prefix_name"].''.$row["user_name"].' '.$row["user_lname"].'</td>
-                            <td class="">'.$row["email"].'</td>
+                            <td class="text-center">'.$row["item_prefix_name"].''.$row["user_name"].' '.$row["user_lname"].'</td>
                             <td class="text-center">'.$row["phone"].'</td>
-                            <td class="text-center">'.$area.'</td>
+                            <td class="text-center">'.$row["email"].'</td>
+                            <td class="text-center">'.$row["password"].'</td>
                             <td class="text-center">'.$status_ext[$row["status"]].'</td>
                             <td class="p-0 pt-1 pr-1 text-right">
                                 <a href="./?page=admin-user-data&user_id='.$row["user_id"].'" title="เปิดดูรายละเอียด" class="btn btn-light text-info btn-sm" style="width: 32px">

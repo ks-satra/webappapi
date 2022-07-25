@@ -33,14 +33,14 @@
     $DATABASE->QueryDelete("user_tmp", " user_id='".$obj[0]["user_id"]."' ");
     if( $obj[0]["image"]!="" ) rename($dirTmp.$obj[0]["image"], $dir.$obj[0]["image"]);
 
-    $link = $_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"].$ROOT;
+    // $link = $_SERVER["REQUEST_SCHEME"].'://'.$_SERVER["HTTP_HOST"].$ROOT;
 
-    $body = '
-        เรียนคุณ '.$data["user_name"].' '.$data["user_lname"].' <br><br>
-        เมื่อวันที่ '.DateTh($data["date"]).' เจ้าหน้าที่ได้ทำการตรวจสอบแล้ว คุณได้รับอนุมัติเป็นที่เรียบร้อย สามารถเข้าสู่ระบบได้ ตามลิงก์ด้านล่างนี้<br><br>
-        <a href="'.$link.'">'.$link.'</a>
-    ';
-    $mail = SendToMail($data["email"], "แจ้งผลการลงทะเบียนผู้ใช้งานระบบเศรษฐกิจและสังคม", $body);
+    // $body = '
+    //     เรียนคุณ '.$data["user_name"].' '.$data["user_lname"].' <br><br>
+    //     เมื่อวันที่ '.DateTh($data["date"]).' เจ้าหน้าที่ได้ทำการตรวจสอบแล้ว คุณได้รับอนุมัติเป็นที่เรียบร้อย สามารถเข้าสู่ระบบได้ ตามลิงก์ด้านล่างนี้<br><br>
+    //     <a href="'.$link.'">'.$link.'</a>
+    // ';
+    // $mail = SendToMail($data["email"], "แจ้งผลการลงทะเบียนผู้ใช้งานระบบเศรษฐกิจและสังคม", $body);
 
     echo json_encode(array(
         "status"=>true,

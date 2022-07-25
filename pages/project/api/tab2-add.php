@@ -9,18 +9,23 @@
         exit();
     }
 
-    $dir = "../../../files/user-tmp/";
     $data = $_POST;
-    $sql = "SELECT * FROM user_tmp WHERE user_id='".$data["user_id"]."' ";
-    $obj = $DATABASE->QueryObj($sql);
-    $data = $obj[0];
+    $data["activity_id"] = $DATABASE->QueryMaxId("activity", "activity_id");
+    $data["user"] = $USER["user_id"];
     $data["date"] = date("Y-m-d H:i:s");
-    if( $DATABASE->QueryDelete("user_tmp", " user_id='".$data["user_id"]."' ") ) {
-        RemoveFile($dir, $data["image"]);
-        
+
+    if( $DATABASE->QueryHaving("activity", "activity_name", $data["activity_name"]) ) {
+        echo json_encode(array(
+            "status"=>false,
+            "message"=>"ไม่สามารถเพิ่มได้ เนื่องจากชื่อโครงการนี้มีอยู่แล้ว"
+        ));
+        exit();
+    }
+
+    if( $DATABASE->QueryInsert("activity", $data) ) {
         echo json_encode(array(
             "status"=>true,
-            "message"=>"ลบข้อมูลสำเร็จ"
+            "message"=>"เพิ่มข้อมูลสำเร็จ"
         ));
     } else {
         echo json_encode(array(

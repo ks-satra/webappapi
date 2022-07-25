@@ -29,9 +29,6 @@ $(function () {
 			</div>\
         ');
         $contents.html($template.html());
-        $contents.find("#imagef").change(function () {
-            FileChange(GLOBAL.ALLOW_IMAGE, GLOBAL.ALLOW_SIZE, this, $contents.find("#image"), './files/activity/default.png', function () { });
-        });
         $footer.find('.btn-add').click(function (event) {
             $contents.find("input[type=submit]").click();
         });
@@ -54,7 +51,7 @@ $(function () {
             ShowLoading();
             $.ajax({
                 type: "POST",
-                url: "pages/" + PAGE + "/api/add.php",
+                url: "pages/" + PAGE + "/api/tab2-add.php",
                 dataType: "JSON",
                 data: GetFormData(_this),
                 contentType: false,
@@ -118,16 +115,12 @@ $(function () {
 			</div>\
         ');
         $contents.html($template.html());
-        $contents.find("#imagef").change(function () {
-            FileChange(GLOBAL.ALLOW_IMAGE, GLOBAL.ALLOW_SIZE, this, $contents.find("#image"), './files/activity/default.png', function () { });
-        });
         $footer.find('.btn-edit').click(function (event) {
             $contents.find("input[type=submit]").click();
         });
         $footer.find('.btn-cancel').click(function (event) {
             popup.close();
         });
-        $contents.find("#image").attr("src", './files/activity/' + data.image);
         $contents.find("[name='activity_id']").val(data.activity_id);
         $contents.find("[name='item_prefix_id']").val(data.item_prefix_id);
         $contents.find("[name='activity_name']").val(data.activity_name);
@@ -137,18 +130,9 @@ $(function () {
         $contents.find("[name='activity_name_all']").val(data.activity_name_all);
         $contents.find("[name='activity_money']").val(data.activity_money);
 
-        $contents.find("#phone").inputmask({ "mask": "999-9999999" });
         BindUnload($contents.find('form'));
         $contents.find('form').submit(function (e) {
             e.preventDefault();
-            if (!$contents.find("#phone").inputmask('isComplete')) {
-                ShowAlert({
-                    html: "กรุณาระบุโทรศัพท์",
-                    type: "error",
-                    callback: function () { $contents.find("#phone").focus(); }
-                });
-                return;
-            }
             var _this = this;
             ShowLoading();
             $.ajax({

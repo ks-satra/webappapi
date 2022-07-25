@@ -12,9 +12,9 @@
                 <li class="nav-item">
                     <a class="nav-link <?php if($tab=="1") echo "active"; ?>" href="./?page=admin-user">ผู้ใช้งานทั้งหมด</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link <?php if($tab=="2") echo "active"; ?>" href="./?page=admin-user&tab=2">สิทธิ์การใช้งาน</a>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="card-body mb-3">

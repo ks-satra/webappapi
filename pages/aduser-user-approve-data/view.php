@@ -17,7 +17,6 @@
 <input type="hidden" id="data" value="<?php echo htmlspecialchars(json_encode($data)); ?>">
 <div id="content-title">
     อนุมัติผู้ใช้งานใหม่
-    <small>ในพื้นที่ดูแลของฉัน</small>
 </div>
 <div id="content-body">
     <div class="row">
@@ -69,55 +68,6 @@
         </div>
     </div>
 
-    <div class="mb-3">
-        ข้อมูลสิทธิ์การเข้าถึงแต่ละพื้นที่
-    </div>
-    <div class="mb-5">
-        <table class="table">
-            <?php
-                $sql = "
-                    SELECT 
-                        area.*,
-                        province.province_name_thai,
-                        user_tmp.user_id
-                    FROM area
-                        INNER JOIN province ON province.province_id=area.province_id
-                        INNER JOIN user_tmp ON user_tmp.area_province_id=area.province_id AND user_tmp.user_id='".$user_id."'
-                    ORDER BY province.province_name_thai
-                ";
-                $obj = $DATABASE->QueryObj($sql);
-                if( sizeof($obj)==0 ) {
-                    echo '<tr><td>ไม่พบข้อมูลพื้นที่</td></tr>';
-                } else {
-                    foreach($obj as $key=>$row) {
-                        $checked = ($row["user_id"]==$user_id) ? "checked" : "";
-                        echo '
-                            <tr>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="area-'.$row["province_id"].'" value="'.$row["province_id"].'" '.$checked.' disabled>
-                                        <label class="custom-control-label" for="area-'.$row["province_id"].'">'.$row["province_name_thai"].'</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="area1-'.$row["province_id"].'" '.$checked.' disabled>
-                                        <label class="custom-control-label" for="area1-'.$row["province_id"].'">อาสาเก็บข้อมูล</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="area2-'.$row["province_id"].'" value="'.$row["province_id"].'" disabled>
-                                        <label class="custom-control-label" for="area2-'.$row["province_id"].'">แอดมิน</label>
-                                    </div>
-                                </td>
-                            </tr>
-                        ';
-                    }
-                }
-            ?>
-        </table>
-    </div>
     <div class="card text-center">
         <div class="card-header">
             ดำเนินการ

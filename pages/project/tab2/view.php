@@ -193,25 +193,14 @@
 
 <div id="template" class="d-none">
     <div class="row">
-        <div class="col-sm-3 text-center mb-3">
-            <img id="image" class="w-100" src="./files/activity/default.png" alt="Profile"
-                onerror="ImageError(this, './files/activity/default.png')">
-        </div>
-        <div class="col-sm-9">
+        <div class="col-sm-12">
             <form autocomplete="off">
                 <input type="hidden" name="activity_id" value="">
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <td class="pt-3" style="min-width: 85px; width: 85px;">โปรไฟล์</td>
-                                <td class="pt-3" style="min-width: 200px;">
-                                    <input type="file" id="imagef" name="imagef"
-                                        accept="<?php echo AcceptImplode($GLOBAL["ALLOW_IMAGE"]);?>">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pt-3">ชื่อโครงการ</td>
+                                <td class="pt-3" style="min-width: 150px; width: 150px;">ชื่อโครงการ</td>
                                 <td class="p-2">
                                     <select class="form-control" id="project_id" name="project_id" required>
                                         <option value="">-- ระบุชื่อโครงการ --</option>
@@ -226,27 +215,42 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3">ชื่อกิจกรรม</td>
+                                <td class="pt-3" style="min-width: 150px; width: 150px;">ชื่อกิจกรรม</td>
                                 <td class="p-2">
                                     <input type="text" class="form-control" id="activity_name" name="activity_name" required>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3">งบประมาณ</td>
+                                <td class="pt-3" style="min-width: 150px; width: 150px;">งบประมาณ</td>
                                 <td class="p-2">
-                                    <input type="text" class="form-control" id="activity_money name="activity_money required>
+                                    <input type="text" class="form-control" id="activity_money" name="activity_money" required>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3">ผู้รับผิดชอบกิจกรรม</td>
+                                <td class="pt-3" style="min-width: 150px; width: 150px;">ผู้รับผิดชอบกิจกรรม</td>
                                 <td class="p-2">
                                     <input type="text" class="form-control" id="activity_name_all" name="activity_name_all" required>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3">สถานที่</td>
+                                <td class="pt-3" style="min-width: 150px; width: 150px;">สถานที่</td>
                                 <td class="p-2">
                                     <input type="activity_place" class="form-control" id="activity_place" name="activity_place" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3" style="min-width: 150px; width: 150px;">สถานะ</td>
+                                <td class="p-2">
+                                    <select class="form-control" id="activity_process_id" name="activity_process_id" required>
+                                        <option value="">-- ระบุสถานะ --</option>
+                                        <?php
+                                            $sql = "SELECT * FROM activity_process ORDER BY activity_process_id";
+                                            $obj = $DATABASE->QueryObj($sql);
+                                            foreach($obj as $key=>$row) {
+                                                echo '<option value="'.$row["activity_process_id"].'">-- '.$row["activity_process_name"].' --</option>';
+                                            }
+                                        ?>
+                                    </select>
                                 </td>
                             </tr>
                             <!-- <tr>

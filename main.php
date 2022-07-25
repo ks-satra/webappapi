@@ -156,8 +156,7 @@
     <div id="my-form" class="container-fluid">
         <form id="formdata" action="" autocomplete="off" method="post" enctype="multipart/form-data">
             <div class="alert alert-warning mb-4" role="alert">
-                บัญชีการใช้งานของคุณอยู่ระหว่างตรวจสอบโดยเจ้าหน้าที่
-                หลังจากเจ้าหน้าที่ตรวจสอบแล้วสามารถตรวจข้อมูลในอีเมลของคุณ
+                บัญชีการใช้งานของคุณอยู่ระหว่างตรวจสอบโดยเจ้าหน้าที่ สามารถเข้าใช้งานได้ภายใน 1 - 2 วัน 
             </div>
             <input type="hidden" name="user_id" value="<?php echo $data["user_id"]; ?>">
             <div class="row">
@@ -170,26 +169,26 @@
                 </div>
                 <div class="col-md-8">
                     <div class="form-row">
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <label for="area_province_id">พื้นที่</label>
                             <select class="form-control mb-3" id="area_province_id" name="area_province_id" required>
                                 <?php
-                                    $sql = "
-                                        SELECT 
-                                            area.*,
-                                            province.province_name_thai
-                                        FROM area 
-                                            INNER JOIN province ON province.province_id=area.province_id
-                                        ORDER BY area.province_id
-                                    ";
-                                    $obj = $DATABASE->QueryObj($sql);
-                                    foreach($obj as $row) {
-                                        $selected = ($row["province_id"]==$data["area_province_id"]) ? "selected": "";
-                                        echo '<option value="'.$row["province_id"].'" '.$selected.'>จังหวัด'.$row["province_name_thai"].'</option>';
-                                    }
+                                    // $sql = "
+                                    //     SELECT 
+                                    //         area.*,
+                                    //         province.province_name_thai
+                                    //     FROM area 
+                                    //         INNER JOIN province ON province.province_id=area.province_id
+                                    //     ORDER BY area.province_id
+                                    // ";
+                                    // $obj = $DATABASE->QueryObj($sql);
+                                    // foreach($obj as $row) {
+                                    //     $selected = ($row["province_id"]==$data["area_province_id"]) ? "selected": "";
+                                    //     echo '<option value="'.$row["province_id"].'" '.$selected.'>จังหวัด'.$row["province_name_thai"].'</option>';
+                                    // }
                                 ?>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="col-md-12">
                             <label for="item_prefix_id">คำนำหน้า</label>
                             <select class="form-control mb-3" id="item_prefix_id" name="item_prefix_id" required>

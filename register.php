@@ -137,25 +137,25 @@
                 </div>
                 <div class="col-md-8">
                     <div class="form-row">
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <label for="area_province_id">พื้นที่ <span class="text-danger">*</span></label>
                             <select class="form-control mb-3" id="area_province_id" name="area_province_id" required>
                                 <?php
-                                    $sql = "
-                                        SELECT 
-                                            area.*,
-                                            province.province_name_thai
-                                        FROM area 
-                                            INNER JOIN province ON province.province_id=area.province_id
-                                        ORDER BY area.province_id
-                                    ";
-                                    $obj = $DATABASE->QueryObj($sql);
-                                    foreach($obj as $row) {
-                                        echo '<option value="'.$row["province_id"].'">จังหวัด'.$row["province_name_thai"].'</option>';
-                                    }
+                                    // $sql = "
+                                    //     SELECT 
+                                    //         area.*,
+                                    //         province.province_name_thai
+                                    //     FROM area 
+                                    //         INNER JOIN province ON province.province_id=area.province_id
+                                    //     ORDER BY area.province_id
+                                    // ";
+                                    // $obj = $DATABASE->QueryObj($sql);
+                                    // foreach($obj as $row) {
+                                    //     echo '<option value="'.$row["province_id"].'">จังหวัด'.$row["province_name_thai"].'</option>';
+                                    // }
                                 ?>
                             </select>
-                        </div>
+                        </div> -->
                         <div class="col-md-12">
                             <label for="item_prefix_id">คำนำหน้า <span class="text-danger">*</span></label>
                             <select class="form-control mb-3" id="item_prefix_id" name="item_prefix_id" required>

@@ -49,8 +49,8 @@
                 </div>
                 <a href="./?page=all-changepass" class="btn btn-light btn-sm border btn-block"><i
                         class="fas fa-key mr-2"></i> เปลี่ยนรหัสผ่าน</a>
-                <a href="./?page=all-login" class="btn btn-light btn-sm border btn-block"><i
-                        class="fas fa-history mr-2"></i> ประวัติการล็อกอิน</a>
+                <!-- <a href="./?page=all-login" class="btn btn-light btn-sm border btn-block"><i
+                        class="fas fa-history mr-2"></i> ประวัติการล็อกอิน</a> -->
             </div>
         </div>
         <div class="col">

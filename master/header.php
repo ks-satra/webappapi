@@ -41,16 +41,15 @@
 
             <?php 
                 // if($USER["level"]["area-admin"]=="Y") { 
-
-                //     $sql = "
-                //         SELECT
-                //             user_tmp.*
-                //         FROM user_tmp
-                //         WHERE user_tmp.area_province_id IN (
-                //             SELECT province_id FROM user_area WHERE user_id='".$USER["user_id"]."'
-                //         )
-                //     ";
-                //     $badge2 = sizeof( $DATABASE->QueryObj($sql) );
+                // $sql = "
+                //     SELECT
+                //         user_tmp.*
+                //     FROM user_tmp
+                //     WHERE user_tmp.area_province_id IN (
+                //         SELECT province_id FROM user_area WHERE user_id='".$USER["user_id"]."'
+                //     )
+                // ";
+                // $badge2 = sizeof( $DATABASE->QueryObj($sql) );
             ?>
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
@@ -79,20 +78,39 @@
             <?php //} ?>
 
 
-            <?php if($USER["level"]["admin"]=="Y") { ?>
+            <?php if($USER["level"]["admin"]=="Y") { 
+                $sql = "
+                    SELECT
+                        user_tmp.*
+                    FROM user_tmp
+                    WHERE user_tmp.area_province_id IN (
+                        SELECT province_id FROM user_area WHERE user_id='".$USER["user_id"]."'
+                    )
+                ";
+                $badge2 = sizeof( $DATABASE->QueryObj($sql) );    
+            ?>
+                
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                     ข้อมูลผู้ใช้งาน
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="./?page=admin-user">ข้อมูลผู้ใช้งานทั้งหมด</a>
-                    <!-- <a class="dropdown-item" href="./?page=admin-area">ข้อมูลพื้นที่เก็บแบบสำรวจ</a>
-                    <a class="dropdown-item" href="./?page=admin-year">ข้อมูลปีงบประมาณ</a>
+                    <a class="dropdown-item" href="./?page=aduser-user-approve">
+                        อนุมัติผู้ใช้งานใหม่
+                        <?php
+                            if( $badge2>0 ) echo '<span class="badge badge-danger">'.$badge2.'</span>';
+                        ?>
+                    </a>
+                    <!-- <a class="dropdown-item" href="./?page=aduser-user-approve">อนุมัติผู้ใช้งานใหม่</a> -->
+                    <!-- <a class="dropdown-item" href="./?page=admin-year">ข้อมูลปีงบประมาณ</a>
                     <a class="dropdown-item" href="./?page=admin-prefix">ตั้งค่าข้อมูลพื้นฐานอื่น ๆ</a>
                     <a class="dropdown-item" href="./?page=admin-update-excel">อัพเดตรายการใน Excel</a>
                     <a class="dropdown-item" href="./?page=admin-online-user">ผู้ใช้งานขณะนี้</a> -->
                 </div>
             </li>
+            <?php } ?>
+            <?php if($USER["level"]["admin"]=="Y" || $USER["level"]["area-admin"]=="Y") { ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                     โครงการ
@@ -132,9 +150,9 @@
                     <a class="dropdown-item" href="./?page=all-changepass">
                         <i class="fas fa-key mr-2"></i> เปลี่ยนรหัสผ่าน
                     </a>
-                    <a class="dropdown-item" href="./?page=all-login">
+                    <!-- <a class="dropdown-item" href="./?page=all-login">
                         <i class="fas fa-history mr-2"></i> ประวัติการล็อกอิน
-                    </a>
+                    </a> -->
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item btn-logout" href="Javascript:">
                         <i class="fas fa-sign-out-alt mr-2"></i> ออกจากระบบ

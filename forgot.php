@@ -137,7 +137,7 @@
             if( sizeof($obj)==1 ) {
                 $data = $obj[0];
                 $data["date"] = date("Y-m-d H:i:s");
-                ShowAlert("", $data["password"], "error");
+                ShowAlert("", "รหัสผ่านของท่าน คือ ".$data["password"], "error");
             } else {
                 ShowAlert("", "ไม่พบอีเมลของคุณ", "error");
             }

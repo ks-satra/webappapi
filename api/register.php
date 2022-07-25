@@ -3,7 +3,7 @@
     
     $dir = "../files/user-tmp/";
     $data["user_id"] = $DATABASE->QueryMaxId("user_tmp", "user_id");
-    $data["area_province_id"] = @$DATABASE->Escape($_POST["area_province_id"]);
+    $data["area_province_id"] = "1";
     $data["item_prefix_id"] = @$DATABASE->Escape($_POST["item_prefix_id"]);
     $data["user_name"] = @$DATABASE->Escape($_POST["user_name"]);
     $data["user_lname"] = @$DATABASE->Escape($_POST["user_lname"]);
@@ -37,19 +37,19 @@
     }
     $data['image'] = $upload["fileName"];
 
-    $body = '
-        เรียนคุณ '.$data["user_name"].' '.$data["user_lname"].' <br><br>
-        เมื่อวันที่ '.DateTh($data["date"]).' คุณได้ทำการลงทะเบียนเพื่อใช้งานระบบเศรษฐกิจและสังคม ซึ่งบัญชีของคุณอยู่ระหว่างการตรวจสอบ โปรดรอผลการตรวจสอบได้ทางอีเมลของคุณ
-    ';
-    $mail = SendToMail($data["email"], "แจ้งผลการลงทะเบียนผู้ใช้งานระบบเศรษฐกิจและสังคม", $body);
-    if( $mail["status"]==false ) {
-        RemoveFile($dir, $data["image"]);
-        echo json_encode(array(
-            "status"=>false,
-            "message"=>$mail["message"]
-        ));
-        exit();
-    }
+    // $body = '
+    //     เรียนคุณ '.$data["user_name"].' '.$data["user_lname"].' <br><br>
+    //     เมื่อวันที่ '.DateTh($data["date"]).' คุณได้ทำการลงทะเบียนเพื่อใช้งานระบบเศรษฐกิจและสังคม ซึ่งบัญชีของคุณอยู่ระหว่างการตรวจสอบ โปรดรอผลการตรวจสอบได้ทางอีเมลของคุณ
+    // ';
+    // $mail = SendToMail($data["email"], "แจ้งผลการลงทะเบียนผู้ใช้งานระบบเศรษฐกิจและสังคม", $body);
+    // if( $mail["status"]==false ) {
+    //     RemoveFile($dir, $data["image"]);
+    //     echo json_encode(array(
+    //         "status"=>false,
+    //         "message"=>$mail["message"]
+    //     ));
+    //     exit();
+    // }
 
     $DATABASE->QueryInsert("user_tmp", $data);
     $_SESSION["eml"] = $data["email"];

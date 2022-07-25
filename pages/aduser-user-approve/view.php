@@ -35,7 +35,6 @@
 ?>
 <div id="content-title">
     อนุมัติผู้ใช้งานใหม่
-    <small>ในพื้นที่ดูแลของฉัน</small>
 </div>
 <div id="content-body">
     <div class="row mb-3">
@@ -132,9 +131,9 @@
                 <tr>
                     <th scope="col" class="text-center">#</th>
                     <th scope="col">ชื่อ-นามสกุล</th>
-                    <th scope="col" class="text-center">อีเมล</th>
                     <th scope="col" class="text-center">โทรศัพท์</th>
-                    <th scope="col" class="text-center">พื้นที่</th>
+                    <th scope="col" class="text-center">อีเมล</th>
+                    <th scope="col" class="text-center">รหัสผ่าน</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -154,9 +153,9 @@
                             <tr data-json="'.htmlspecialchars(json_encode($row)).'">
                                 <th class="text-center order">'.(($show*($p-1))+($key+1)).'</th>
                                 <td>'.$row["item_prefix_name"].''.$row["user_name"].' '.$row["user_lname"].'</td>
-                                <td class="text-center">'.$row["email"].'</td>
                                 <td class="text-center">'.$row["phone"].'</td>
-                                <td class="text-center">จังหวัด'.$row["province_name_thai"].'</td>
+                                <td class="text-center">'.$row["email"].'</td>
+                                <td class="text-center">'.$row["password"].'</td>
                                 <td class="p-0 pt-1 pr-1 text-right">
                                     <a href="./?page=aduser-user-approve-data&user_id='.$row["user_id"].'" title="เปิดดูรายละเอียด" class="btn-open btn btn-light text-info btn-sm">
                                         <i class="fa fa-info"></i>

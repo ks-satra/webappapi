@@ -73,64 +73,89 @@
     </div>
 
     <div class="mb-3">
-        ข้อมูลสิทธิ์การเข้าถึงแต่ละพื้นที่
+        ข้อมูลกิจกรรมทั้งหมด
     </div>
     <div class="mb-5">
-        <table class="table">
+        <table class="table"><thead>
+            <tr>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col">ชื่อโครงการ</th>
+                <th scope="col" class="">ชื่อกิจกรรม</th>
+                <th scope="col" class="text-center">งบประมาณ</th>
+                <th scope="col" class="text-center">ผู้รับผิดชอบกิจกรรม</th>
+                <th scope="col" class="text-center">สถานะ</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
             <?php
                 $sql = "
-                    SELECT 
-                        p.province_id,
-                        p.province_name_thai,
-                        ua2.user_id,
-                        ua2.is_admin
-                    FROM user_area ua
-                        INNER JOIN province p ON p.province_id=ua.province_id
-                        LEFT JOIN user_area ua2 ON ua2.province_id=ua.province_id AND ua2.user_id='".$user_id."'
-                    WHERE ua.user_id='".$USER["user_id"]."' AND ua.is_admin='Y'
-                ";
+                    SELECT
+                        a.*,
+                        p.project_id,
+                        p.project_name,
+                        p.project_money,
+                        p.project_place,
+                        p.project_type_id,
+                        p.project_name_all,
+                        pt.project_type_name,
+                        ap.activity_process_name
+                    FROM
+                        activity a
+                        INNER JOIN project p ON a.project_id = p.project_id AND p.project_id = '".$data["project_id"]."'
+                        INNER JOIN project_type pt ON p.project_type_id = pt.project_type_id
+                        INNER JOIN activity_process ap ON a.activity_process_id = ap.activity_process_id
+                    WHERE p.project_id = '".$data["project_id"]."'
+                    ";
                 $obj = $DATABASE->QueryObj($sql);
                 if( sizeof($obj)==0 ) {
                     echo '<tr><td>ไม่พบข้อมูลพื้นที่</td></tr>';
                 } else {
                     foreach($obj as $key=>$row) {
-                        $checked = ($row["user_id"]==$user_id) ? "checked" : "";
-                        $checked2 = ($row["is_admin"]=="Y") ? "checked" : "";
+                        $status_ext = array(
+                            "1"=>'<span class="text-success"><i class="fas fa-check"></i> ดำเนินการ</span>',
+                            "2"=>'<span class="text-danger"><i class="fas fa-times"></i> ยังไม่ได้ดำเนินการแล้ว</span>'
+                        );
                         echo '
                             <tr>
+                                <th class="text-center order">'.($key+1).'</th>
                                 <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="area-'.$row["province_id"].'" value="'.$row["province_id"].'" '.$checked.' disabled>
-                                        <label class="custom-control-label" for="area-'.$row["province_id"].'">'.$row["province_name_thai"].'</label>
+                                    <div class="custom-control">
+                                        <label>'.$row["project_name"].'</label>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="area1-'.$row["province_id"].'" '.$checked.' disabled>
-                                        <label class="custom-control-label" for="area1-'.$row["province_id"].'">อาสาเก็บข้อมูล</label>
+                                    <div class="custom-control">
+                                        <label>'.$row["activity_name"].'</label>
                                     </div>
                                 </td>
                                 <td>
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="area2-'.$row["province_id"].'" value="'.$row["province_id"].'" '.$checked2.' disabled>
-                                        <label class="custom-control-label" for="area2-'.$row["province_id"].'">แอดมิน</label>
+                                    <div class="custom-control">
+                                        <label>'.$row["activity_money"].'</label>
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="custom-control">
+                                        <label>'.$row["activity_name"].'</label>
+                                    </div>
+                                </td>
+                                <td class="text-center">'.$status_ext[$row["activity_process_id"]].'</td>
                             </tr>
                         ';
                     }
                 }
             ?>
+        </tbody>
         </table>
     </div>
     <div class="card text-center">
         <div class="card-header">
-            ลบผู้ใช้งาน
+            ลบโครงการนี้
         </div>
         <div class="card-body">
-            <button id="btn-del" class="btn btn-danger"><i class="fas fa-trash mr-1"></i> ลบผู้ใช้งานรายนี้</button>
-            <div class="p-4 text-danger" style="font-size: 16px;">คำเตือน !!! หากคุณลบผู้ใช้งานรายนี้
-                ผู้ใช้งานรายนี้จะไม่สามารถใช้งานได้ และไม่สามารถทำการกู้กลับมาใช้งานอีกได้อีกต่อไป</div>
+            <button id="btn-del" class="btn btn-danger"><i class="fas fa-trash mr-1"></i> ลบโครงการนี้</button>
+            <div class="p-4 text-danger" style="font-size: 16px;">หมายเหตุ !!! คุณไม่สามารถลบโครงการนี้ได้ 
+             หากมีข้อมูลกิจกรรม คุณจะต้องลบข้อมูลกิจกรรมก่อน</div>
         </div>
     </div>
 </div>
