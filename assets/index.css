@@ -1,0 +1,142 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-bottom: 64px;
+    overflow-x: hidden;
+    font-size: 14px;
+}
+
+#navbar {
+    padding: 0px 10px;
+    background-color: #2154a3;
+    min-height: 75px;
+}
+
+#navbar .navbar-brand {
+    font-size: 22px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#navbar .navbar-brand img {
+    width: 50px;
+    margin: -20px 0;
+    margin-right: 5px;
+}
+
+#navbar .profile-name {
+    position: relative;
+    padding-left: 60px;
+}
+
+#navbar .profile-image {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    border-radius: 50%;
+}
+
+#navbar .dropdown-menu {
+    margin-bottom: 10px;
+}
+
+#navbar #btn-notification .badge {
+    top: 0px;
+    left: 30px;
+}
+
+#content {
+    padding-top: 40px;
+}
+
+#content-title {
+    margin-bottom: 30px;
+    padding-bottom: 7px;
+    border-bottom: 5px solid #90a9d0;
+    font-size: 22px;
+}
+#content-title small {
+    font-size: 14px;
+    color: #5a5a5a;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 20px;
+    background-color: #22478f;
+    color: #fff;
+}
+
+.w-33 {
+    width: 33%;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+/**** icon ใน input ****/
+
+.inner-icon .form-control {
+    padding-left: 2.375rem;
+}
+
+.inner-icon .form-control-feedback {
+    position: absolute;
+    z-index: 4;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+
+/* Extra small */
+
+@media (max-width: 575.98px) {
+    #navbar .profile-name {
+        margin: 15px 0;
+    }
+    #navbar .navbar-brand {
+        font-size: 18px;
+        padding-top: 20px;
+    }
+}
+
+
+/* Small */
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    #navbar .profile-name {
+        margin: 15px 0;
+    }
+}
+
+
+/* Medium */
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    #navbar .profile-name {
+        margin: 15px 0;
+    }
+}
+
+
+/* Large */
+
+@media (min-width: 992px) and (max-width: 1199.98px) {}
+
+
+/* Extra large */
+
+@media (min-width: 1200px) {}

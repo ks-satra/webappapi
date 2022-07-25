@@ -1,0 +1,32 @@
+.btn-open, .btn-approve, .btn-del{
+    width: 32px;
+}
+
+.pagination .page-link {
+    height: 38px;
+}
+
+.popup-add .jBox-title {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.popup-add .jBox-footer {
+    background: #cfffcb;
+}
+
+.popup-edit .jBox-title {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.popup-edit .jBox-footer {
+    background: #fff8a4;
+}
+
+.swal2-container {
+    z-index: 10000;
+}
+#image {
+    max-width: 200px;
+}

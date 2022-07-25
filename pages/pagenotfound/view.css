@@ -1,0 +1,12 @@
+.notfound-title {
+	font-size: 90px;
+    font-weight: bold;
+    color: #ff9900;
+}
+.notfound-subtitle {
+	font-size: 22px;
+    margin-bottom: 12px;
+}
+.notfound-detail {
+	font-size: 14px;
+}

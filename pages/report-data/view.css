@@ -1,0 +1,26 @@
+.report-body {
+    margin: auto;
+    border-top: 0;
+}
+
+.level-1 {
+    font-weight: bold;
+}
+
+.level-2 .desc {
+    padding-left: 50px !important;
+}
+
+.level-3 .desc {
+    padding-left: 100px !important;
+}
+
+.amount {
+    text-align: right;
+}
+
+.form-number {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}

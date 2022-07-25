@@ -1,0 +1,29 @@
+/*
+**  Project required    : jQuery-3.2.1, bootstrap-4.3.1, jBox-0.6.4, PHPExcel
+**  Auther              : Srikee Eatrong
+**  Datetime            : 3/5/2019 15.46
+**  Company             : Computer Center PSU Pattani Campus.
+***********************************
+    Example Usage
+    
+    var option = {
+        title: 'Your Title',
+        uploadURL: "dir/yourapi.php",
+        column: [
+            { value:"feild1", name:"Feild 1" },
+            { value:"feild2", name:"Feild 2" },
+        ],
+        onClose: function(uploaded) {
+            console.log(uploaded);
+        }
+    };
+    uiExcelUpload(option);
+*/
+.uiExcelUpload select, .uiExcelUpload option, .uiExcelUpload th { text-align: center; text-align-last: center; }
+.uiExcelUpload .uiRed { background-color: #ff8989; color: #FFF; }
+.uiExcelUpload .uiRed option { background-color: #FFF; color: #000; }
+.uiExcelUpload .uiGreen { background-color: #ceffd8;color: #000; }
+.uiExcelUpload .uiGreen td { background-color: #ceffd8;color: #000; }
+.uiExcelUpload .jBox-content { /* padding: 0px !important; */ font-size: 14px; overflow-x: auto !important; }
+.uiExcelUpload div[data-jbox-content-appended] { height: 100%; }
+.uiExcelUpload .table-frame { height: 100%; }

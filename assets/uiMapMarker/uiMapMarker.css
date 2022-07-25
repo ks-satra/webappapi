@@ -1,0 +1,17 @@
+/*
+**  Project required    : jQuery-3.2.1, bootstrap-4.3.1, jBox-0.6.4, Google Map Api
+**  Auther              : Srikee Eatrong
+**  Datetime            : 8/5/2019 10.39
+**  Company             : Computer Center PSU Pattani Campus.
+***********************************
+    Example Usage
+    
+    uiMapMarker({
+        title: "Map marker",
+        //marker: [6.901397, 101.242161],
+        onClose: function(marker) {
+            console.log(marker);
+        }
+    });
+*/
+.uiMapMarker div[data-jbox-content-appended] { height: 100%; }
