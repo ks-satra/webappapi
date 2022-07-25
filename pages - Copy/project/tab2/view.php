@@ -173,7 +173,7 @@
                             <td class="text-center">'.$row["item_prefix_name"].''.$row["user_name"].' '.$row["user_lname"].'</td>
                             <td class="text-center">'.$status_ext[$row["activity_process_id"]].'</td>
                             <td class="p-0 pt-1 pr-1 text-right">
-                                <a href="./?page=activity-data&activity_id='.$row["activity_id"].'" title="เปิดดูรายละเอียด" class="btn btn-light text-info btn-sm" style="width: 32px">
+                                <a href="./?page=project-data&activity_id='.$row["activity_id"].'" title="เปิดดูรายละเอียด" class="btn btn-light text-info btn-sm" style="width: 32px">
                                     <i class="fa fa-info"></i>
                                 </a>
                                 <button title="แก้ไข" class="btn-edit btn btn-light text-warning btn-sm" style="width: 32px">

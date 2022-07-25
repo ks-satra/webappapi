@@ -1,0 +1,8 @@
+.report-body {
+    margin: auto;
+    border-top: 0;
+}
+
+.amount {
+    text-align: right;
+}

@@ -5,34 +5,20 @@
     $condition_search = "";
     if( $search!="" ) {
         $condition_search .= " AND (
-            u.user_name LIKE '%".$search."%'
-            OR u.user_lname LIKE '%".$search."%'
-            OR u.email LIKE '%".$search."%'
-            OR u.phone LIKE '%".$search."%'
+            p.project_name LIKE '%".$search."%'
+            OR p.project_name_all LIKE '%".$search."%'
+            OR p.project_money LIKE '%".$search."%'
+            OR p.project_place LIKE '%".$search."%'
+            OR pt.project_type_name LIKE '%".$search."%'
         )";
-    } 
+    }
     
     $sql = "
         SELECT
-            a.*,
-            p.project_id,
-            p.project_name,
-            p.project_name_all,
-            p.project_money,
-            p.project_place,
-            p.project_type_id,
-            pt.project_type_name,
-            u.user_name,
-            u.user_lname,
-            pr.item_prefix_name,
-            ap.activity_process_id
-        FROM
-            activity a
-            INNER JOIN project p ON a.project_id = p.project_id
-            INNER JOIN project_type pt ON p.project_type_id = pt.project_type_id
-            INNER JOIN `user` u ON a.`user` = u.user_id
-            INNER JOIN item_prefix pr ON u.item_prefix_id = pr.item_prefix_id
-            INNER JOIN activity_process ap ON a.activity_process_id = ap.activity_process_id
+            p.*, 
+            pt.project_type_name
+        FROM project p
+            INNER JOIN project_type pt ON pt.project_type_id = p.project_type_id
         WHERE 1=1
             ".$condition_search."
         ORDER BY p.project_id DESC
@@ -44,8 +30,8 @@
     $objData = $DATABASE->QueryObj($sql." LIMIT ".$start.", ".$show);
 ?>
 <div class="mb-4">
-    <button id="btn-add" class="btn btn-success" title="เพิ่มกิจกรรมใหม่">
-        <i class="fas fa-plus"></i> เพิ่มกิจกรรมใหม่
+    <button id="btn-add" class="btn btn-success" title="เพิ่มโครงการ">
+        <i class="fas fa-plus"></i> เพิ่มโครงการ
     </button>
 </div>
 <div class="row mb-3">
@@ -61,7 +47,7 @@
                 </div>
                 <?php } ?>
             </div>
-            <small class="form-text text-muted mb-3">ค้นหา โดยระบุ ชื่อโครงการ หรือชื่อกิจกรรม หรืองบประมาณ หรือผู้รับผิดชอบกิจกรรม
+            <small class="form-text text-muted mb-3">ค้นหา โดยระบุ ชื่อโครงการ หรืองบประมาณ หรือสถานที่ หรือประเภทโครงการ หรือผู้รับผิดชอบโครงการ
                 อย่างใดอย่างหนึ่ง และกด Enter</small>
         </form>
     </div>
@@ -141,10 +127,10 @@
             <tr>
                 <th scope="col" class="text-center">#</th>
                 <th scope="col">ชื่อโครงการ</th>
-                <th scope="col" class="">ชื่อกิจกรรม</th>
-                <th scope="col" class="text-center">งบประมาณ</th>
-                <th scope="col" class="text-center">ผู้รับผิดชอบกิจกรรม</th>
-                <th scope="col" class="text-center">สถานะ</th>
+                <th scope="col" class="">งบประมาณ</th>
+                <th scope="col" class="text-center">สถานที่</th>
+                <th scope="col" class="text-center">ประเภทโครงการ</th>
+                <th scope="col" class="text-center">ผู้รับผิดชอบโครงการ</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -160,20 +146,26 @@
                     ';
                 }
                 foreach($objData as $key=>$row) {
-                        $status_ext = array(
-                            "1"=>'<span class="text-success"><i class="fas fa-check"></i> ดำเนินการ</span>',
-                            "2"=>'<span class="text-danger"><i class="fas fa-times"></i> ยังไม่ได้ดำเนินการแล้ว</span>'
-                        );
-                        echo '
+                    $sql = "
+                        SELECT 
+                            project.*,
+                            project_type.project_type_name
+                        FROM project
+                            INNER JOIN project_type ON project_type.project_type_id=project.project_type_id
+                        WHERE project.project_id='".$row["project_id"]."'
+                        ORDER BY project_type.project_type_name
+                    ";
+                    $obj = $DATABASE->QueryObj($sql);
+                    echo '
                         <tr data-json="'.htmlspecialchars(json_encode($row)).'">
                             <th class="text-center order">'.(($show*($p-1))+($key+1)).'</th>
-                            <td class="">'.$row["project_name"].'</td>
-                            <td class="text-center">'.$row["activity_name"].'</td>
-                            <td class="text-center">'.$row["activity_money"].'</td>
-                            <td class="text-center">'.$row["item_prefix_name"].''.$row["user_name"].' '.$row["user_lname"].'</td>
-                            <td class="text-center">'.$status_ext[$row["activity_process_id"]].'</td>
+                            <td>'.$row["project_name"].'</td>
+                            <td class="">'.$row["project_money"].'</td>
+                            <td class="text-center">'.$row["project_place"].'</td>
+                            <td class="text-center">'.$row["project_type_name"].'</td>
+                            <td class="text-center">'.$row["project_name_all"].'</td>
                             <td class="p-0 pt-1 pr-1 text-right">
-                                <a href="./?page=activity-data&activity_id='.$row["activity_id"].'" title="เปิดดูรายละเอียด" class="btn btn-light text-info btn-sm" style="width: 32px">
+                                <a href="./?page=project-data&project_id='.$row["project_id"].'" title="เปิดดูรายละเอียด" class="btn btn-light text-info btn-sm" style="width: 32px">
                                     <i class="fa fa-info"></i>
                                 </a>
                                 <button title="แก้ไข" class="btn-edit btn btn-light text-warning btn-sm" style="width: 32px">
@@ -195,73 +187,49 @@
     <div class="row">
         <div class="col-sm-12">
             <form autocomplete="off">
-                <input type="hidden" name="activity_id" value="">
+                <input type="hidden" name="project_id" value="">
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
                                 <td class="pt-3" style="min-width: 150px; width: 150px;">ชื่อโครงการ</td>
                                 <td class="p-2">
-                                    <select class="form-control" id="project_id" name="project_id" required>
-                                        <option value="">-- ระบุชื่อโครงการ --</option>
+                                    <input type="text" class="form-control" id="project_name" name="project_name" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3">งบประมาณ</td>
+                                <td class="p-2">
+                                    <input type="text" class="form-control" id="project_money" name="project_money" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3">สถานที่</td>
+                                <td class="p-2">
+                                    <input type="text" class="form-control" id="project_place" name="project_place" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3">ผู้รับผิดชอบโครงการ</td>
+                                <td class="p-2">
+                                    <input type="text" class="form-control" id="project_name_all" name="project_name_all" required>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3">ประเภทโครงการ</td>
+                                <td class="p-2">
+                                    <select class="form-control" id="project_type_id" name="project_type_id" required>
+                                        <option value="">-- ระบุประเภทโครงการ --</option>
                                         <?php
-                                            $sql = "SELECT * FROM project ORDER BY project_id";
+                                            $sql = "SELECT * FROM project_type ORDER BY project_type_id";
                                             $obj = $DATABASE->QueryObj($sql);
                                             foreach($obj as $key=>$row) {
-                                                echo '<option value="'.$row["project_id"].'">-- '.$row["project_name"].' --</option>';
+                                                echo '<option value="'.$row["project_type_id"].'">-- '.$row["project_type_name"].' --</option>';
                                             }
                                         ?>
                                     </select>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">ชื่อกิจกรรม</td>
-                                <td class="p-2">
-                                    <input type="text" class="form-control" id="activity_name" name="activity_name" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">งบประมาณ</td>
-                                <td class="p-2">
-                                    <input type="text" class="form-control" id="activity_money" name="activity_money" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">ผู้รับผิดชอบกิจกรรม</td>
-                                <td class="p-2">
-                                    <input type="text" class="form-control" id="activity_name_all" name="activity_name_all" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">สถานที่</td>
-                                <td class="p-2">
-                                    <input type="activity_place" class="form-control" id="activity_place" name="activity_place" required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">สถานะ</td>
-                                <td class="p-2">
-                                    <select class="form-control" id="activity_process_id" name="activity_process_id" required>
-                                        <option value="">-- ระบุสถานะ --</option>
-                                        <?php
-                                            $sql = "SELECT * FROM activity_process ORDER BY activity_process_id";
-                                            $obj = $DATABASE->QueryObj($sql);
-                                            foreach($obj as $key=>$row) {
-                                                echo '<option value="'.$row["activity_process_id"].'">-- '.$row["activity_process_name"].' --</option>';
-                                            }
-                                        ?>
-                                    </select>
-                                </td>
-                            </tr>
-                            <!-- <tr>
-                                <td class="pt-3">สถานะ</td>
-                                <td class="p-2">
-                                    <select class="form-control" id="status" name="status" required>
-                                        <option value="Y">ใช้งาน</option>
-                                        <option value="N">ไม่ใช้งาน</option>
-                                    </select>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div>

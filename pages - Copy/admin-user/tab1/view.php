@@ -10,32 +10,17 @@
             OR u.email LIKE '%".$search."%'
             OR u.phone LIKE '%".$search."%'
         )";
-    } 
+    }
     
     $sql = "
         SELECT
-            a.*,
-            p.project_id,
-            p.project_name,
-            p.project_name_all,
-            p.project_money,
-            p.project_place,
-            p.project_type_id,
-            pt.project_type_name,
-            u.user_name,
-            u.user_lname,
-            pr.item_prefix_name,
-            ap.activity_process_id
-        FROM
-            activity a
-            INNER JOIN project p ON a.project_id = p.project_id
-            INNER JOIN project_type pt ON p.project_type_id = pt.project_type_id
-            INNER JOIN `user` u ON a.`user` = u.user_id
-            INNER JOIN item_prefix pr ON u.item_prefix_id = pr.item_prefix_id
-            INNER JOIN activity_process ap ON a.activity_process_id = ap.activity_process_id
+            u.*, 
+            ip.item_prefix_name
+        FROM user u
+            INNER JOIN item_prefix ip ON ip.item_prefix_id = u.item_prefix_id
         WHERE 1=1
             ".$condition_search."
-        ORDER BY p.project_id DESC
+        ORDER BY u.user_id DESC
     ";
     $show = $GLOBAL["SHOW"];
     $all = sizeof( $DATABASE->QueryObj($sql) );
@@ -44,8 +29,8 @@
     $objData = $DATABASE->QueryObj($sql." LIMIT ".$start.", ".$show);
 ?>
 <div class="mb-4">
-    <button id="btn-add" class="btn btn-success" title="เพิ่มกิจกรรมใหม่">
-        <i class="fas fa-plus"></i> เพิ่มกิจกรรมใหม่
+    <button id="btn-add" class="btn btn-success" title="เพิ่มผู้ใช้ใหม่">
+        <i class="fas fa-plus"></i> เพิ่มผู้ใช้ใหม่
     </button>
 </div>
 <div class="row mb-3">
@@ -61,7 +46,7 @@
                 </div>
                 <?php } ?>
             </div>
-            <small class="form-text text-muted mb-3">ค้นหา โดยระบุ ชื่อโครงการ หรือชื่อกิจกรรม หรืองบประมาณ หรือผู้รับผิดชอบกิจกรรม
+            <small class="form-text text-muted mb-3">ค้นหา โดยระบุ ชื่อ หรือนามสกุล หรือชื่อผู้ใช้งาน หรือโทรศัพท์
                 อย่างใดอย่างหนึ่ง และกด Enter</small>
         </form>
     </div>
@@ -140,10 +125,10 @@
         <thead>
             <tr>
                 <th scope="col" class="text-center">#</th>
-                <th scope="col">ชื่อโครงการ</th>
-                <th scope="col" class="">ชื่อกิจกรรม</th>
-                <th scope="col" class="text-center">งบประมาณ</th>
-                <th scope="col" class="text-center">ผู้รับผิดชอบกิจกรรม</th>
+                <th scope="col" class="text-center">ชื่อ-นามสกุล</th>
+                <th scope="col" class="text-center">โทรศัพท์</th>
+                <th scope="col" class="text-center">อีเมล</th>
+                <th scope="col" class="text-center">รหัสผ่าน</th>
                 <th scope="col" class="text-center">สถานะ</th>
                 <th scope="col"></th>
             </tr>
@@ -160,20 +145,20 @@
                     ';
                 }
                 foreach($objData as $key=>$row) {
-                        $status_ext = array(
-                            "1"=>'<span class="text-success"><i class="fas fa-check"></i> ดำเนินการ</span>',
-                            "2"=>'<span class="text-danger"><i class="fas fa-times"></i> ยังไม่ได้ดำเนินการแล้ว</span>'
-                        );
-                        echo '
+                    $status_ext = array(
+                        "Y"=>'<span class="text-success"><i class="fas fa-check"></i> ใช้งาน</span>',
+                        "N"=>'<span class="text-danger"><i class="fas fa-times"></i> ไม่ใช้งาน</span>'
+                    );
+                    echo '
                         <tr data-json="'.htmlspecialchars(json_encode($row)).'">
                             <th class="text-center order">'.(($show*($p-1))+($key+1)).'</th>
-                            <td class="">'.$row["project_name"].'</td>
-                            <td class="text-center">'.$row["activity_name"].'</td>
-                            <td class="text-center">'.$row["activity_money"].'</td>
                             <td class="text-center">'.$row["item_prefix_name"].''.$row["user_name"].' '.$row["user_lname"].'</td>
-                            <td class="text-center">'.$status_ext[$row["activity_process_id"]].'</td>
+                            <td class="text-center">'.$row["phone"].'</td>
+                            <td class="text-center">'.$row["email"].'</td>
+                            <td class="text-center">'.$row["password"].'</td>
+                            <td class="text-center">'.$status_ext[$row["status"]].'</td>
                             <td class="p-0 pt-1 pr-1 text-right">
-                                <a href="./?page=activity-data&activity_id='.$row["activity_id"].'" title="เปิดดูรายละเอียด" class="btn btn-light text-info btn-sm" style="width: 32px">
+                                <a href="./?page=admin-user-data&user_id='.$row["user_id"].'" title="เปิดดูรายละเอียด" class="btn btn-light text-info btn-sm" style="width: 32px">
                                     <i class="fa fa-info"></i>
                                 </a>
                                 <button title="แก้ไข" class="btn-edit btn btn-light text-warning btn-sm" style="width: 32px">
@@ -193,67 +178,69 @@
 
 <div id="template" class="d-none">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-3 text-center mb-3">
+            <img id="image" class="w-100" src="./files/user/default.png" alt="Profile"
+                onerror="ImageError(this, './files/user/default.png')">
+        </div>
+        <div class="col-sm-9">
             <form autocomplete="off">
-                <input type="hidden" name="activity_id" value="">
+                <input type="hidden" name="user_id" value="">
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">ชื่อโครงการ</td>
+                                <td class="pt-3" style="min-width: 85px; width: 85px;">โปรไฟล์</td>
+                                <td class="pt-3" style="min-width: 200px;">
+                                    <input type="file" id="imagef" name="imagef"
+                                        accept="<?php echo AcceptImplode($GLOBAL["ALLOW_IMAGE"]);?>">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="pt-3">คำนำหน้า</td>
                                 <td class="p-2">
-                                    <select class="form-control" id="project_id" name="project_id" required>
-                                        <option value="">-- ระบุชื่อโครงการ --</option>
+                                    <select class="form-control" id="item_prefix_id" name="item_prefix_id" required>
+                                        <option value="">-- ระบุคำนำหน้า --</option>
                                         <?php
-                                            $sql = "SELECT * FROM project ORDER BY project_id";
+                                            $sql = "SELECT * FROM item_prefix ORDER BY item_prefix_id";
                                             $obj = $DATABASE->QueryObj($sql);
                                             foreach($obj as $key=>$row) {
-                                                echo '<option value="'.$row["project_id"].'">-- '.$row["project_name"].' --</option>';
+                                                echo '<option value="'.$row["item_prefix_id"].'">-- '.$row["item_prefix_name"].' --</option>';
                                             }
                                         ?>
                                     </select>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">ชื่อกิจกรรม</td>
+                                <td class="pt-3">ชื่อ</td>
                                 <td class="p-2">
-                                    <input type="text" class="form-control" id="activity_name" name="activity_name" required>
+                                    <input type="text" class="form-control" id="user_name" name="user_name" required>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">งบประมาณ</td>
+                                <td class="pt-3">นามสกุล</td>
                                 <td class="p-2">
-                                    <input type="text" class="form-control" id="activity_money" name="activity_money" required>
+                                    <input type="text" class="form-control" id="user_lname" name="user_lname" required>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">ผู้รับผิดชอบกิจกรรม</td>
+                                <td class="pt-3">โทรศัพท์</td>
                                 <td class="p-2">
-                                    <input type="text" class="form-control" id="activity_name_all" name="activity_name_all" required>
+                                    <input type="text" class="form-control" id="phone" name="phone" required>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">สถานที่</td>
+                                <td class="pt-3">อีเมล</td>
                                 <td class="p-2">
-                                    <input type="activity_place" class="form-control" id="activity_place" name="activity_place" required>
+                                    <input type="email" class="form-control" id="email" name="email" required>
                                 </td>
                             </tr>
                             <tr>
-                                <td class="pt-3" style="min-width: 150px; width: 150px;">สถานะ</td>
+                                <td class="pt-3">รหัสผ่าน</td>
                                 <td class="p-2">
-                                    <select class="form-control" id="activity_process_id" name="activity_process_id" required>
-                                        <option value="">-- ระบุสถานะ --</option>
-                                        <?php
-                                            $sql = "SELECT * FROM activity_process ORDER BY activity_process_id";
-                                            $obj = $DATABASE->QueryObj($sql);
-                                            foreach($obj as $key=>$row) {
-                                                echo '<option value="'.$row["activity_process_id"].'">-- '.$row["activity_process_name"].' --</option>';
-                                            }
-                                        ?>
-                                    </select>
+                                    <input type="text" class="form-control" id="password" name="password" required>
                                 </td>
                             </tr>
-                            <!-- <tr>
+                            <tr>
                                 <td class="pt-3">สถานะ</td>
                                 <td class="p-2">
                                     <select class="form-control" id="status" name="status" required>
@@ -261,7 +248,7 @@
                                         <option value="N">ไม่ใช้งาน</option>
                                     </select>
                                 </td>
-                            </tr> -->
+                            </tr>
                         </tbody>
                     </table>
                 </div>

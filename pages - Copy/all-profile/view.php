@@ -109,10 +109,10 @@
                         $obj = $DATABASE->QueryObj($sql);
                         foreach($obj as $key=>$row) {
                             if( $row["is_admin"]=="Y" ) {
-                                $txt .= "<div>".$count.". ผู้จัดการบัญชีผู้ใช้"."</div>";
+                                $txt .= "<div>".$count.". แอดมินพื้นที่จังหวัด".$row["province_name_thai"]."</div>";
                                 $count++;
                             } else {
-                                $txt .= "<div>".$count.". สมาชิก"."</div>";
+                                $txt .= "<div>".$count.". อาสาบันทึกแบบสอบถามพื้นที่จังหวัด".$row["province_name_thai"]."</div>";
                                 $count++;
                             }
                         }
