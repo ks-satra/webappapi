@@ -14,10 +14,11 @@
     $data["user"] = $USER["user_id"];
     $data["date"] = date("Y-m-d H:i:s");
 
+
     if( $DATABASE->QueryHaving("activity", "activity_name", $data["activity_name"]) ) {
         echo json_encode(array(
             "status"=>false,
-            "message"=>"ไม่สามารถเพิ่มได้ เนื่องจากชื่อโครงการนี้มีอยู่แล้ว"
+            "message"=>"ไม่สามารถเพิ่มได้ เนื่องจากชื่อกิจกรรมนี้มีอยู่แล้ว"
         ));
         exit();
     }

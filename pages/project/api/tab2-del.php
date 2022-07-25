@@ -11,15 +11,7 @@
 
     $data = $_POST;
 
-    if( $DATABASE->QueryHaving("activity", "project_id", $data["project_id"]) ) {
-        echo json_encode(array(
-            "status"=>false,
-            "message"=>"ไม่สามารถลบได้ เนื่องจากข้อมูลนี้ถูกใช้งานแล้ว"
-        ));
-        exit();
-    }
-
-   if( $DATABASE->QueryDelete("project", " project_id='".$data["project_id"]."' ") ) {
+   if( $DATABASE->QueryDelete("activity", " activity_id='".$data["activity_id"]."' ") ) {
         echo json_encode(array(
             "status"=>true,
             "message"=>"ลบข้อมูลสำเร็จ"

@@ -88,8 +88,7 @@
         </div>
         <div class="card-body">
             <button id="btn-del" class="btn btn-danger"><i class="fas fa-trash mr-1"></i> ลบโครงการนี้</button>
-            <div class="p-4 text-danger" style="font-size: 16px;">หมายเหตุ !!! คุณไม่สามารถลบโครงการนี้ได้ 
-             หากมีข้อมูลกิจกรรม คุณจะต้องลบข้อมูลกิจกรรมก่อน</div>
+            <div class="p-4 text-danger" style="font-size: 16px;">หมายเหตุ !!! หากคุณลบข้อมูลกิจกรรมนี้ คุณจะไม่สามารถกู้คืนได้อีก</div>
         </div>
     </div>
 </div>

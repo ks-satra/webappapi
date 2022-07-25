@@ -189,7 +189,7 @@ $(function () {
             callback: function (rs) {
                 if (rs) {
                     ShowLoading();
-                    $.post("pages/" + PAGE + "/api/del.php", {
+                    $.post("pages/" + PAGE + "/api/tab2-del.php", {
                         activity_id: data.activity_id
                     }, function (res) {
                         HideLoading();

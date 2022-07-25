@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2022 at 12:10 PM
+-- Generation Time: Jul 25, 2022 at 07:44 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -44,8 +44,11 @@ CREATE TABLE `activity` (
 --
 
 INSERT INTO `activity` (`activity_id`, `activity_name`, `activity_money`, `activity_place`, `project_id`, `activity_name_all`, `activity_process_id`, `user`, `date`) VALUES
-(1, 'สตรา', 213, 'ยยย', 1, 'แแแแแกดดดพพ', '2', 1, '2022-07-25 15:00:15'),
-(2, 'ทดสอบ', 123, 'ยรนีรีัีทมมมส', 1, 'นยนยนยน', '1', 1, '2022-07-25 15:02:40');
+(1, 'กิจกรรมจิตอาสา บ้านทอน', 2000, 'มัสยิดกลางจังหวัดยะลา', 1, 'นางสาวเอบีซี  ดีอีเอฟ', '2', 1, '2022-07-25 22:58:38'),
+(2, 'กิจกรรมจิตอาสา บ้านใหม่', 1500, 'มัสยิดกลางจังหวัดปัตตานี', 1, 'นางสาวมกราคม  กุมภาพันธ์', '2', 1, '2022-07-25 23:00:40'),
+(5, 'aaaa', 200, 'aaa', 2, 'aaa', '2', 1, '2022-07-25 23:44:00'),
+(6, 'eeee', 200, 'www', 2, 'www', '1', 1, '2022-07-25 23:45:11'),
+(7, '', 0, '', 0, '', '', 1, '2022-07-25 23:45:17');
 
 -- --------------------------------------------------------
 
@@ -132,7 +135,11 @@ CREATE TABLE `item_prefix` (
 --
 
 INSERT INTO `item_prefix` (`item_prefix_id`, `item_prefix_name`, `user`, `date`) VALUES
-(1, 'นางสาว', 1, '0000-00-00 00:00:00');
+(1, 'นาย', 1, '0000-00-00 00:00:00'),
+(2, 'นางสาว', 1, '0000-00-00 00:00:00'),
+(3, 'นาง', 1, '0000-00-00 00:00:00'),
+(4, 'เด็กชาย', 1, '0000-00-00 00:00:00'),
+(5, 'เด็กหญิง', 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -184,7 +191,13 @@ INSERT INTO `login` (`login_id`, `session`, `ip_local`, `json_ip`, `status`, `em
 (4, '8t5tvmivmdb4r9jk4lha8ojb9g', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'Satra.e@yru.ac.th', '123456', 1, '2022-07-25 15:33:44'),
 (5, 'hjib9d0jev15lrp81se0au0u8n', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'abc@gmail.com', '123456', 2, '2022-07-25 16:02:03'),
 (6, '8t5tvmivmdb4r9jk4lha8ojb9g', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'Satra.e@yru.ac.th', '123456', 1, '2022-07-25 17:08:43'),
-(7, '8t5tvmivmdb4r9jk4lha8ojb9g', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'Satra.e@yru.ac.th', '123456', 1, '2022-07-25 17:09:35');
+(7, '8t5tvmivmdb4r9jk4lha8ojb9g', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'Satra.e@yru.ac.th', '123456', 1, '2022-07-25 17:09:35'),
+(8, '94ose76uh1hilmg151ki3758kd', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 22:50:30'),
+(9, '94ose76uh1hilmg151ki3758kd', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 22:51:09'),
+(10, '94ose76uh1hilmg151ki3758kd', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 22:52:48'),
+(11, 'l13v5pltt1mpljsmhsdmnaaj0d', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 23:11:25'),
+(12, 'ggomklc83s9r0q9c11tlvoaf7d', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 23:23:30'),
+(13, 'c0sgavhak3huiagujer9l7bbjc', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 23:41:49');
 
 -- --------------------------------------------------------
 
@@ -208,7 +221,8 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`project_id`, `project_name`, `project_money`, `project_place`, `project_type_id`, `project_name_all`, `user`, `date`) VALUES
-(1, 'ssss', 52, 'qqq', 1, 'qqq', 1, '2022-07-25 14:11:17');
+(1, 'โครงการสานพลังชุมชน', 5000, 'นราธิวาส ยะลา และปัตตานี', 3, 'นางสาวสตรา  เอียดตรง', 1, '2022-07-25 23:27:42'),
+(2, 'sss', 3000, 'aaa', 2, 'aaa', 1, '2022-07-25 23:43:44');
 
 -- --------------------------------------------------------
 
@@ -226,9 +240,9 @@ CREATE TABLE `project_type` (
 --
 
 INSERT INTO `project_type` (`project_type_id`, `project_type_name`) VALUES
-(1, 'AA'),
-(2, 'dd'),
-(3, 'ss');
+(1, 'การศึกษา'),
+(2, 'ท่องเที่ยว'),
+(3, 'สิ่งแวดล้อม');
 
 -- --------------------------------------------------------
 

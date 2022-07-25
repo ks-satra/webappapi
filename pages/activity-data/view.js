@@ -6,8 +6,8 @@ $(function() {
             callback: function(rs) {
                 if (rs) {
                     ShowLoading();
-                    $.post("pages/admin-user/api/del.php", {
-                        user_id: data.user_id
+                    $.post("pages/project/api/tab2-del.php", {
+                        activity_id: data.activity_id
                     }, function(res) {
                         HideLoading();
                         ShowAlert({
@@ -32,9 +32,3 @@ $(function() {
         });
     });
 });
-
-function onError(ctrl) {
-    ImageError(ctrl, './files/user/default.png');
-    $(ctrl).closest("a").attr("href", './files/user/default.png');
-    toggleImageViewer($(ctrl).closest("a"));
-}

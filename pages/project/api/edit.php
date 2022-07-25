@@ -11,8 +11,8 @@
     
     $data = $_POST;
     
-    // $data["user"] = $USER["user_id"];
-    // $data["date"] = date("Y-m-d H:i:s");
+    $data["user"] = $USER["user_id"];
+    $data["date"] = date("Y-m-d H:i:s");
     
     if( $DATABASE->QueryHaving("project", "project_name", $data["project_name"] , "project_id", $data["project_id"]) ) {
         echo json_encode(array(

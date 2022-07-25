@@ -14,7 +14,7 @@ $(function () {
     $("#btn-add").click(function () {
         $title = $('\
 			<div style="font-size: 16px;">\
-                <i class="fas fa-plus mb-2"></i> เพิ่มผู้ใช้ใหม่\
+                <i class="fas fa-plus mb-2"></i> เพิ่มโครงการใหม่\
 			</div>\
 		');
         $contents = $('\
