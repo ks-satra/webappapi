@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2022 at 11:29 AM
+-- Generation Time: Jul 25, 2022 at 12:10 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -117,35 +117,6 @@ INSERT INTO `area` (`province_id`, `province_code`, `user`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `asset`
---
-
-CREATE TABLE `asset` (
-  `home_id` int(11) NOT NULL,
-  `item_asset_id` int(11) NOT NULL COMMENT 'รายการทรัพย์สิน',
-  `num` int(11) NOT NULL COMMENT 'จำนวน',
-  `total` int(11) NOT NULL COMMENT 'รวมเป็นเงิน (บาท/ปี)',
-  `user` int(11) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='32 ทรัพย์สินสำหรับการประกอบอาชีพ';
-
--- --------------------------------------------------------
-
---
--- Table structure for table `debt`
---
-
-CREATE TABLE `debt` (
-  `home_id` int(11) NOT NULL,
-  `item_debt_borrow_id` int(11) NOT NULL COMMENT 'แหล่งหนี้สิน',
-  `total` int(11) NOT NULL COMMENT 'จำนวนหนี้สิน (บาท)',
-  `user` int(11) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='31 หนี้สิน';
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `item_prefix`
 --
 
@@ -211,7 +182,9 @@ INSERT INTO `login` (`login_id`, `session`, `ip_local`, `json_ip`, `status`, `em
 (2, '8t5tvmivmdb4r9jk4lha8ojb9g', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'Satra.e@yru.ac.th', '123456', 1, '2022-07-25 15:19:38'),
 (3, '8t5tvmivmdb4r9jk4lha8ojb9g', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'abc@gmail.com', '123456', 2, '2022-07-25 15:28:38'),
 (4, '8t5tvmivmdb4r9jk4lha8ojb9g', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'Satra.e@yru.ac.th', '123456', 1, '2022-07-25 15:33:44'),
-(5, 'hjib9d0jev15lrp81se0au0u8n', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'abc@gmail.com', '123456', 2, '2022-07-25 16:02:03');
+(5, 'hjib9d0jev15lrp81se0au0u8n', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'abc@gmail.com', '123456', 2, '2022-07-25 16:02:03'),
+(6, '8t5tvmivmdb4r9jk4lha8ojb9g', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'Satra.e@yru.ac.th', '123456', 1, '2022-07-25 17:08:43'),
+(7, '8t5tvmivmdb4r9jk4lha8ojb9g', '::1', '{\"ip\":\"118.174.156.72\",\"city\":\"Yala\",\"region\":\"Yala\",\"country\":\"TH\",\"loc\":\"6.5400,101.2813\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"95000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'Satra.e@yru.ac.th', '123456', 1, '2022-07-25 17:09:35');
 
 -- --------------------------------------------------------
 
@@ -279,20 +252,6 @@ INSERT INTO `province` (`province_id`, `province_name_thai`, `province_name_eng`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `revert_comment`
---
-
-CREATE TABLE `revert_comment` (
-  `revert_comment_id` int(11) NOT NULL,
-  `home_id` int(11) NOT NULL COMMENT 'รหัสบ้าน',
-  `comment` text NOT NULL COMMENT 'เหตุผล',
-  `user` int(11) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='comment ส่งกลับแก้ไข';
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tambol`
 --
 
@@ -332,7 +291,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `user_name`, `user_lname`, `item_prefix_id`, `email`, `password`, `phone`, `image`, `status`, `user`, `date`) VALUES
 (1, 'สตรา', 'เอียตรง', 1, 'Satra.e@yru.ac.th', '123456', '092-9857194', '', 'Y', 1, NULL),
-(2, 'AAAA', 'BBBB', 1, 'abc@gmail.com', '123456', '085-2222222', '1658737108.jpg', 'Y', 1, '2022-07-25 15:25:32');
+(2, 'AAAA', 'BBBB', 1, 'abc@gmail.com', '123456', '085-2222222', '1658737108.jpg', 'Y', 1, '2022-07-25 15:25:32'),
+(3, 'ทดสอบระบบ', 'ของฉัน', 1, '55@ddd', '123456', '035-5555555', '1658742168.jpg', 'Y', 1, '2022-07-25 16:48:03');
 
 -- --------------------------------------------------------
 
@@ -354,7 +314,8 @@ CREATE TABLE `user_area` (
 
 INSERT INTO `user_area` (`user_id`, `province_id`, `is_admin`, `date`, `user`) VALUES
 (1, '1', 'Y', '2022-07-25 15:25:05', 1),
-(2, '1', 'N', '2022-07-25 15:25:32', 1);
+(2, '1', 'N', '2022-07-25 15:25:32', 1),
+(3, '1', 'N', '2022-07-25 16:48:03', 1);
 
 -- --------------------------------------------------------
 
@@ -399,20 +360,6 @@ CREATE TABLE `user_tmp` (
   `date` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='ข้อมูลผู้ลงทะเบียนอาสาบันทึกแบบสำรวจ';
 
--- --------------------------------------------------------
-
---
--- Table structure for table `year`
---
-
-CREATE TABLE `year` (
-  `year_id` int(11) NOT NULL,
-  `year_name` varchar(4) NOT NULL COMMENT 'ชื่อปี เช่น 2564',
-  `default` varchar(1) NOT NULL COMMENT 'ค่าเริ่มต้นใช่งาน',
-  `user` int(11) NOT NULL,
-  `date` datetime NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='ปีงบประมาณที่เก็บแบบสำรวจ';
-
 --
 -- Indexes for dumped tables
 --
@@ -446,18 +393,6 @@ ALTER TABLE `amphur`
 --
 ALTER TABLE `area`
   ADD PRIMARY KEY (`province_id`) USING BTREE;
-
---
--- Indexes for table `asset`
---
-ALTER TABLE `asset`
-  ADD PRIMARY KEY (`home_id`,`item_asset_id`) USING BTREE;
-
---
--- Indexes for table `debt`
---
-ALTER TABLE `debt`
-  ADD PRIMARY KEY (`home_id`,`item_debt_borrow_id`) USING BTREE;
 
 --
 -- Indexes for table `item_prefix`
@@ -496,12 +431,6 @@ ALTER TABLE `province`
   ADD PRIMARY KEY (`province_id`) USING BTREE;
 
 --
--- Indexes for table `revert_comment`
---
-ALTER TABLE `revert_comment`
-  ADD PRIMARY KEY (`revert_comment_id`) USING BTREE;
-
---
 -- Indexes for table `tambol`
 --
 ALTER TABLE `tambol`
@@ -530,12 +459,6 @@ ALTER TABLE `user_level`
 --
 ALTER TABLE `user_tmp`
   ADD PRIMARY KEY (`user_id`) USING BTREE;
-
---
--- Indexes for table `year`
---
-ALTER TABLE `year`
-  ADD PRIMARY KEY (`year_id`) USING BTREE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
