@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2022 at 07:44 PM
+-- Generation Time: Jul 26, 2022 at 06:57 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_projectapi`
+-- Database: `db_webappapi`
 --
 
 -- --------------------------------------------------------
@@ -120,6 +120,77 @@ INSERT INTO `area` (`province_id`, `province_code`, `user`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `device`
+--
+
+CREATE TABLE `device` (
+  `device_id` int(11) NOT NULL,
+  `device_name` text NOT NULL,
+  `device_sum` double NOT NULL,
+  `user` int(11) NOT NULL,
+  `date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `device`
+--
+
+INSERT INTO `device` (`device_id`, `device_name`, `device_sum`, `user`, `date`) VALUES
+(1, 'ไม้กวาด', 10, 1, '2022-07-26 11:06:19'),
+(2, 'เก้าอี้', 5, 1, '2022-07-26 11:06:28'),
+(3, 'พัดลม', 20, 1, '2022-07-26 11:06:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `device_back`
+--
+
+CREATE TABLE `device_back` (
+  `device_back_id` int(11) NOT NULL,
+  `device_lend_id` int(11) NOT NULL,
+  `device_back_no` varchar(20) NOT NULL,
+  `device_back_date` text NOT NULL,
+  `device_back_time` time NOT NULL,
+  `user` int(11) NOT NULL,
+  `date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `device_back`
+--
+
+INSERT INTO `device_back` (`device_back_id`, `device_lend_id`, `device_back_no`, `device_back_date`, `device_back_time`, `user`, `date`) VALUES
+(1, 1, 'sss', '2022-07-27', '11:42:00', 1, '2022-07-26 11:42:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `device_lend`
+--
+
+CREATE TABLE `device_lend` (
+  `device_lend_id` int(11) NOT NULL,
+  `device_lend_no` varchar(20) NOT NULL,
+  `device_lend_date` text NOT NULL,
+  `device_lend_time` time NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `device_id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `device_lend`
+--
+
+INSERT INTO `device_lend` (`device_lend_id`, `device_lend_no`, `device_lend_date`, `device_lend_time`, `student_id`, `device_id`, `user`, `date`) VALUES
+(1, 'ppp', '', '00:00:00', 1, 1, 1, NULL),
+(2, 'ssss', '2022-07-21', '11:47:00', 2, 1, 1, '2022-07-26 11:44:42');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `item_prefix`
 --
 
@@ -197,7 +268,10 @@ INSERT INTO `login` (`login_id`, `session`, `ip_local`, `json_ip`, `status`, `em
 (10, '94ose76uh1hilmg151ki3758kd', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 22:52:48'),
 (11, 'l13v5pltt1mpljsmhsdmnaaj0d', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 23:11:25'),
 (12, 'ggomklc83s9r0q9c11tlvoaf7d', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 23:23:30'),
-(13, 'c0sgavhak3huiagujer9l7bbjc', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 23:41:49');
+(13, 'c0sgavhak3huiagujer9l7bbjc', '::1', '{\"ip\":\"113.53.195.212\",\"hostname\":\"node-r8.pool-113-53.dynamic.totinternet.net\",\"city\":\"Phatthalung\",\"region\":\"Phatthalung\",\"country\":\"TH\",\"loc\":\"7.6179,100.0779\",\"org\":\"AS23969 TOT Public Company Limited\",\"postal\":\"93000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'satra.e@yru.ac.th', '123456', 1, '2022-07-25 23:41:49'),
+(14, 't1iipr2etbnqfdteases3u92kb', '::1', '{\"ip\":\"202.29.32.82\",\"city\":\"Tak Bai\",\"region\":\"Narathiwat\",\"country\":\"TH\",\"loc\":\"6.2500,102.0333\",\"org\":\"AS24328 Yala Rajabhat University Education\",\"postal\":\"96000\",\"timezone\":\"Asia/Bangkok\"}', 'N', 'satra.e@yru.ac.th', '1234566', 0, '2022-07-26 09:10:19'),
+(15, 't1iipr2etbnqfdteases3u92kb', '::1', '{\"ip\":\"202.29.32.82\",\"city\":\"Tak Bai\",\"region\":\"Narathiwat\",\"country\":\"TH\",\"loc\":\"6.2500,102.0333\",\"org\":\"AS24328 Yala Rajabhat University Education\",\"postal\":\"96000\",\"timezone\":\"Asia/Bangkok\"}', 'N', 'satra.e@yru.ac.th', '1234566', 0, '2022-07-26 09:10:25'),
+(16, 't1iipr2etbnqfdteases3u92kb', '::1', '{\"ip\":\"202.29.32.82\",\"city\":\"Tak Bai\",\"region\":\"Narathiwat\",\"country\":\"TH\",\"loc\":\"6.2500,102.0333\",\"org\":\"AS24328 Yala Rajabhat University Education\",\"postal\":\"96000\",\"timezone\":\"Asia/Bangkok\"}', 'Y', 'Satra.e@yru.ac.th', '123456', 1, '2022-07-26 09:10:54');
 
 -- --------------------------------------------------------
 
@@ -262,6 +336,31 @@ CREATE TABLE `province` (
 
 INSERT INTO `province` (`province_id`, `province_name_thai`, `province_name_eng`) VALUES
 ('1', 'ยะลา', 'yala');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `student_id` int(11) NOT NULL,
+  `item_prefix_id` int(11) NOT NULL,
+  `student_code` varchar(9) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
+  `student_lname` varchar(255) NOT NULL,
+  `student_room` text NOT NULL,
+  `user` int(255) NOT NULL,
+  `date` datetime DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='ข้อมูลผู้ใช้งานระบบ';
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`student_id`, `item_prefix_id`, `student_code`, `student_name`, `student_lname`, `student_room`, `user`, `date`) VALUES
+(1, 2, '405759003', 'สตรา', 'เอียดตรง', 'ห้อง 1', 1, '2022-07-26 11:02:54'),
+(2, 1, 'aaa', 'pp', 'ppp', 'pp', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -409,6 +508,24 @@ ALTER TABLE `area`
   ADD PRIMARY KEY (`province_id`) USING BTREE;
 
 --
+-- Indexes for table `device`
+--
+ALTER TABLE `device`
+  ADD PRIMARY KEY (`device_id`);
+
+--
+-- Indexes for table `device_back`
+--
+ALTER TABLE `device_back`
+  ADD PRIMARY KEY (`device_back_id`);
+
+--
+-- Indexes for table `device_lend`
+--
+ALTER TABLE `device_lend`
+  ADD PRIMARY KEY (`device_lend_id`);
+
+--
 -- Indexes for table `item_prefix`
 --
 ALTER TABLE `item_prefix`
@@ -443,6 +560,12 @@ ALTER TABLE `project_type`
 --
 ALTER TABLE `province`
   ADD PRIMARY KEY (`province_id`) USING BTREE;
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`student_id`) USING BTREE;
 
 --
 -- Indexes for table `tambol`

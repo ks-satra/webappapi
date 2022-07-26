@@ -10,73 +10,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <?php //if($USER["level"]["area-user"]=="Y") { ?>
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                    แบบสำรวจ
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="./?page=user-form-add">เพิ่มแบบสำรวจ</a>
-                    <a class="dropdown-item" href="./?page=user-form">แบบสำรวจของฉัน</a>
-                </div>
-            </li> -->
-            <?php //} ?>
-
-
-
-            <?php //if($USER["level"]["report-all"]=="Y" || $USER["level"]["area-admin"]=="Y") { ?>
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                    รายงาน
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="./?page=report-form">แบบสำรวจทั้งหมด</a> -->
-                    <!-- <a class="dropdown-item" href="./?page=report-data">รายงานสภาพเศรษฐกิจ</a>
-                    <a class="dropdown-item" href="./?page=report-users">จำนวนผู้บันทึกแบบสำรวจทั้งหมด</a>
-                    <a class="dropdown-item" href="./?page=export-excel">Export Excel</a> -->
-                <!-- </div>
-            </li> -->
-            <?php // }?>
-
-
-            <?php 
-                // if($USER["level"]["area-admin"]=="Y") { 
-                // $sql = "
-                //     SELECT
-                //         user_tmp.*
-                //     FROM user_tmp
-                //     WHERE user_tmp.area_province_id IN (
-                //         SELECT province_id FROM user_area WHERE user_id='".$USER["user_id"]."'
-                //     )
-                // ";
-                // $badge2 = sizeof( $DATABASE->QueryObj($sql) );
-            ?>
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                    แอดมินพื้นที่ -->
-                    <?php
-                        // if( $badge2>0 ) echo '<span class="badge badge-danger">'.($badge2).'</span>';
-                    ?>
-                </a>
-                <!-- <div class="dropdown-menu"> -->
-                    <!-- <a class="dropdown-item" href="./?page=aduser-form">
-                        แบบสำรวจรอตรวจ
-                        <?php
-                           // if( $badge1>0 ) echo '<span class="badge badge-danger">'.$badge1.'</span>';
-                        ?>
-                    </a> -->
-                    <!-- <a class="dropdown-item" href="./?page=aduser-user-approve">
-                        อนุมัติผู้ใช้งานใหม่
-                        <?php
-                            //if( $badge2>0 ) echo '<span class="badge badge-danger">'.$badge2.'</span>';
-                        ?>
-                    </a>
-                    <a class="dropdown-item" href="./?page=aduser-user">ข้อมูลผู้ใช้งาน</a> -->
-                    <!-- <a class="dropdown-item" href="./?page=aduser-report-users">จำนวนผู้บันทึกแบบสำรวจ</a> -->
-                <!-- </div>
-            </li> -->
-            <?php //} ?>
-
+           
 
             <?php if($USER["level"]["admin"]=="Y") { 
                 $sql = "
@@ -90,7 +24,7 @@
                 $badge2 = sizeof( $DATABASE->QueryObj($sql) );    
             ?>
                 
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                     ข้อมูลผู้ใช้งาน
                 </a>
@@ -102,26 +36,71 @@
                             if( $badge2>0 ) echo '<span class="badge badge-danger">'.$badge2.'</span>';
                         ?>
                     </a>
-                    <!-- <a class="dropdown-item" href="./?page=aduser-user-approve">อนุมัติผู้ใช้งานใหม่</a> -->
-                    <!-- <a class="dropdown-item" href="./?page=admin-year">ข้อมูลปีงบประมาณ</a>
-                    <a class="dropdown-item" href="./?page=admin-prefix">ตั้งค่าข้อมูลพื้นฐานอื่น ๆ</a>
-                    <a class="dropdown-item" href="./?page=admin-update-excel">อัพเดตรายการใน Excel</a>
-                    <a class="dropdown-item" href="./?page=admin-online-user">ผู้ใช้งานขณะนี้</a> -->
                 </div>
-            </li>
+            </li> -->
             <?php } ?>
-            <?php if($USER["level"]["admin"]=="Y" || $USER["level"]["area-admin"]=="Y") { ?>
-            <li class="nav-item dropdown">
+            <?php //if($USER["level"]["admin"]=="Y" || $USER["level"]["area-admin"]=="Y") { ?>
+            <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                     โครงการ
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="./?page=project">ข้อมูลโครงการทั้งหมด</a>
-                    <!-- <a class="dropdown-item" href="./?page=admin-area">ข้อมูลพื้นที่เก็บแบบสำรวจ</a>
-                    <a class="dropdown-item" href="./?page=admin-year">ข้อมูลปีงบประมาณ</a>
-                    <a class="dropdown-item" href="./?page=admin-prefix">ตั้งค่าข้อมูลพื้นฐานอื่น ๆ</a>
-                    <a class="dropdown-item" href="./?page=admin-update-excel">อัพเดตรายการใน Excel</a>
-                    <a class="dropdown-item" href="./?page=admin-online-user">ผู้ใช้งานขณะนี้</a> -->
+                </div>
+            </li> -->
+            <?php //} ?>
+
+            <?php if($USER["level"]["admin"]=="Y" || $USER["level"]["area-admin"]=="Y") { ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    นักศึกษา
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="./?page=student">ข้อมูลนักศึกษาทั้งหมด</a>
+                </div>
+            </li>
+            <?php } ?>
+
+            <?php if($USER["level"]["admin"]=="Y" || $USER["level"]["area-admin"]=="Y") { ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    อุปกรณ์
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="./?page=device">ข้อมูลอุปกรณ์ทั้งหมด</a>
+                </div>
+            </li>
+            <?php } ?>
+
+            <?php if($USER["level"]["admin"]=="Y" || $USER["level"]["area-admin"]=="Y") { ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    บันทึกการยืมอุปกรณ์
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="./?page=device-lend">บันทึกการยืมอุปกรณ์ทั้งหมด</a>
+                </div>
+            </li>
+            <?php } ?>
+
+            <?php if($USER["level"]["admin"]=="Y" || $USER["level"]["area-admin"]=="Y") { ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    บันทึกการคืนอุปกรณ์
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="./?page=device-back">บันทึกการคืนอุปกรณ์ทั้งหมด</a>
+                </div>
+            </li>
+            <?php } ?>
+
+            <?php if($USER["level"]["admin"]=="Y" || $USER["level"]["area-admin"]=="Y") { ?>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                    รายการประวัติการยืม-คืน
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="./?page=device-lend-back">รายการประวัติการยืม-คืนทั้งหมด</a>
                 </div>
             </li>
             <?php } ?>

@@ -16,7 +16,7 @@
         $HOST = "localhost";
         $USER = "root";
         $PASS = "";
-        $DBNAME = "db_projectapi";
+        $DBNAME = "db_webappapi";
     }
     $DATABASE = new Database($HOST, $USER, $PASS, $DBNAME);
     $CRYPTION = new cryption();
